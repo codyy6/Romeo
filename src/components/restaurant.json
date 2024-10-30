@@ -1,0 +1,128 @@
+{
+    "items": [
+        { "id": 1, "name": "Rakuzen" },
+        { "id": 2, "name": "Brew House" },
+        { "id": 3, "name": "鱼师" },
+        { "id": 4, "name": "高人馆" },
+        { "id": 5, "name": "Ali, Muthu & Ah Hock" },
+        { "id": 6, "name": "Restaurant Al-Shamiah" },
+        { "id": 7, "name": "MonaLisa" },
+        { "id": 8, "name": "阳光咖啡店" },
+        { "id": 9, "name": "Beef Bowl" },
+        { "id": 10, "name": "外婆家猪肚鸡" },
+        { "id": 11, "name": "Seven Kingdoms" },
+        { "id": 12, "name": "Santai SS15" },
+        { "id": 13, "name": "128 Thai" },
+        { "id": 14, "name": "Chitose" },
+        { "id": 15, "name": "老街坊" },
+        { "id": 16, "name": "jangsojang deapbap" },
+        { "id": 17, "name": "soi 55" },
+        { "id": 18, "name": "Daun Pisanglah" },
+        { "id": 19, "name": "食客饭堂" },
+        { "id": 20, "name": "nasi lemak bamboo" },
+        { "id": 21, "name": "壹茶 kopitiam" },
+        { "id": 22, "name": "Sarawak Noodle House" },
+        { "id": 23, "name": "Gold Cowboys" },
+        { "id": 24, "name": "Ooi Noodle House" },
+        { "id": 25, "name": "Ambeston Noodle" },
+        { "id": 26, "name": "The Toast House" },
+        { "id": 27, "name": "Uncle Seng" },
+        { "id": 28, "name": "Ipoh Tuck Kee" },
+        { "id": 29, "name": "Signature Noodle Noodle" },
+        { "id": 30, "name": "Parii White Coffee" },
+        { "id": 31, "name": "Jibril" },
+        { "id": 32, "name": "Twone" },
+        { "id": 33, "name": "Loong Hwa Kopitiam" },
+        { "id": 34, "name": "Tiffin's Thai Cuisine" },
+        { "id": 35, "name": "上海大排档" },
+        { "id": 36, "name": "鼎香生肉面" },
+        { "id": 37, "name": "Carol Noodle House" },
+        { "id": 38, "name": "Mee Tarik" },
+        { "id": 39, "name": "Nasi Lemak Burung Hantu" },
+        { "id": 40, "name": "Eatomo" },
+        { "id": 41, "name": "Food Kitchen" },
+        { "id": 42, "name": "Hungry Don" },
+        { "id": 43, "name": "Murni Mamak" },
+        { "id": 44, "name": "Menya Hanabi" },
+        { "id": 45, "name": "Twins Dak Galbi" },
+        { "id": 46, "name": "台湾卤肉饭" },
+        { "id": 47, "name": "忘不了" },
+        { "id": 48, "name": "Lim Fried Chicken" },
+        { "id": 49, "name": "九分海南茶室" },
+        { "id": 50, "name": "Chicken Rice Guys" },
+        { "id": 51, "name": "Penang Asam House" },
+        { "id": 52, "name": "Buttermilk Kitchen" },
+        { "id": 53, "name": "E-One" },
+        { "id": 54, "name": "老板面" },
+        { "id": 55, "name": "Grandmum Kitchen" },
+        { "id": 56, "name": "辣椒版面" },
+        { "id": 57, "name": "金铺记牛腩" },
+        { "id": 58, "name": "Noodle Mansion" },
+        { "id": 59, "name": "Good Friends" },
+        { "id": 60, "name": "面对面" },
+        { "id": 61, "name": "Sushi Ya Ri" },
+        { "id": 62, "name": "Ah Ma Shou Zou" },
+        { "id": 63, "name": "ShinMapo Korean BBQ" },
+        { "id": 64, "name": "Omega Pork Noodle" },
+        { "id": 65, "name": "Nasi Lemak Shop" },
+        { "id": 66, "name": "Lucky Mala Noodle" }
+    ],
+    "categories": [
+        {
+            "category": "Chinese",
+            "itemIds": [
+                3, 4, 8, 9, 10, 15, 19, 21, 22, 24, 25, 27, 28, 29, 30, 32, 33,
+                35, 36, 37, 38, 41, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
+                57, 58, 60, 62, 64, 66
+            ]
+        },
+        {
+            "category": "Indian",
+            "itemIds": [6, 43]
+        },
+        {
+            "category": "Korean",
+            "itemIds": [16, 45, 63]
+        },
+        {
+            "category": "Japanese",
+            "itemIds": [1, 13, 40, 42, 44, 61]
+        },
+        {
+            "category": "Malay",
+            "itemIds": [5, 23, 18, 20, 39, 65]
+        },
+        {
+            "category": "Western",
+            "itemIds": [2, 11, 23, 26, 31]
+        },
+        {
+            "category": "Thai",
+            "itemIds": [13, 17, 34]
+        },
+        {
+            "category": "Noodles",
+            "itemIds": [1]
+        },
+        {
+            "category": "Rice",
+            "itemIds": []
+        },
+        {
+            "category": "Distance - Close",
+            "itemIds": []
+        },
+        {
+            "category": "Distance - Medium",
+            "itemIds": []
+        },
+        {
+            "category": "Distance - Far",
+            "itemIds": []
+        },
+        {
+            "category": "Set Lunch Provided",
+            "itemIds": []
+        }
+    ]
+}
