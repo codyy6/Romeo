@@ -1,105 +1,123 @@
-import React, { useState, useEffect } from "react";
-import Wheel from "./Wheel";
-import restaurantData from "./restaurant.json";
+import React, { useState } from "react";
+import Button from "../assets/download.png";
+import "./Home.css";
 
 function Home() {
-    const [spinning, setSpinning] = useState(false);
-    const [winners, setWinners] = useState([]);
-    const [openModal, setOpenModal] = useState(false);
-    const [items, setItems] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [wheelColor, setWheelColor] = useState(
-        window.localStorage.getItem("wheelColor") || "#E50303"
-    );
-    const [fontColor, setFontColor] = useState(
-        window.localStorage.getItem("fontColor") || "#FFFFFF"
-    );
+  const roses = [
+    `
+ Λ
+( ˘ ᵕ ˘   🌹🌹🌹🌹🌹
+ ヽ  つ  ＼ 🌹🌹🌹／
+     UU   / 🎀 \\
+        `,
+    `
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⢔⣒⠂⣀⣀⣤⣄⣀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣴⣿⠋⢠⣟⡼⣷⠼⣆⣼⢇⣿⣄⠱⣄
+⠀⠀⠀⠀⠀⠀⠀⠹⣿⡀⣆⠙⠢⠐⠉⠉⣴⣾⣽⢟⡰⠃
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣦⠀⠤⢴⣿⠿⢋⣴⡏⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡙⠻⣿⣶⣦⣭⣉⠁⣿⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣷⠀⠈⠉⠉⠉⠉⠇⡟⠀⠀⠨
+⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⣘⣦⣀⠀⠀⣀⡴⠊⠀⠀⢀⠆
+⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠛⢻⣿⣿⣿⣿⠻⣧⡄⠀⢐⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠫⣿⠉⠻⣇⠘⠓⠂⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢶⣾⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⣿⠀⠀⠀⠠⠀⠀⠀⠀
+⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣧⠀⢸⣿⠀⠀⠠⠠⠀⠀⠀⠀
+⠀⠀⠀⠈⠙⠻⢿⣿⣿⠿⠛⣄⢸⡇⠀⠀⠌⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⠀⠀⠂⠠⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡁⠀⠈⠀⠠⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⠀⠈⠄⠀⠂⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣷⠂⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠀
+    `,
+    `
+    
+                          111¶¶¶111 
+                       1¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+                     ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶1 
+                   1¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶1 
+            11111¶¶¶¶¶¶¶¶¶¶¶¶11¶¶¶¶¶¶¶¶¶¶ 
+        1¶¶¶¶¶¶11¶¶¶¶¶¶¶¶¶1111111¶¶¶¶¶¶¶¶1 
+       ¶¶¶11¶¶¶¶11111¶¶¶¶¶11111111¶¶¶¶¶¶¶1 
+      ¶¶¶¶1¶¶¶¶¶¶¶¶111¶¶¶¶1111¶11¶¶¶¶¶¶¶¶ 
+            ¶¶¶¶¶¶¶¶¶11¶¶¶111111¶¶¶11111111 
+             ¶¶¶¶¶¶¶¶¶11¶¶¶111¶¶¶111111111¶¶1
+             1¶¶¶¶¶¶¶¶¶11¶¶¶¶¶¶111¶¶¶¶¶¶¶¶¶¶¶
+             ¶¶¶¶¶¶¶¶¶¶111¶¶1111¶¶¶¶¶¶¶¶¶ 
+             ¶¶¶¶¶¶1¶¶¶¶11¶1111¶¶¶¶¶¶¶¶¶1 
+            ¶¶¶¶¶¶111¶¶¶111111¶¶¶¶1¶¶¶¶¶¶ 
+            ¶¶¶¶¶111¶¶¶¶11111¶¶¶¶11¶¶¶¶¶¶ 
+            ¶¶¶¶11111¶¶¶¶111¶¶¶¶111¶¶¶¶¶¶ 
+            ¶¶¶¶11111¶¶¶¶11¶¶¶¶1111¶¶¶¶¶¶ 
+            ¶¶¶¶¶1111¶¶¶1¶¶¶¶¶11111¶¶¶¶¶¶ 
+            1¶¶¶¶11111¶¶¶¶¶¶1111111¶¶¶¶¶¶ 
+             ¶¶¶¶¶1111¶¶¶¶1111111¶¶¶¶¶¶¶1 
+             1¶¶¶¶¶¶¶1¶¶¶1111111¶¶¶¶¶¶¶¶ 
+              1¶¶¶¶¶¶¶¶¶¶¶¶¶1¶¶¶¶¶¶¶¶¶¶ 
+                ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶1 
+    ¶            11¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶1 
+   ¶¶¶             1¶¶¶¶¶1¶¶¶¶11 
+  ¶¶¶¶            ¶¶¶11¶¶1 
+ ¶¶¶¶¶1           ¶   11¶¶ 
+¶¶¶¶¶¶¶1          ¶  ¶1¶¶¶ 
+¶1¶1¶¶¶¶         ¶¶ 1¶¶¶1 
+¶11¶¶¶¶¶¶       1¶  ¶¶ 
+¶¶¶¶¶¶¶¶¶       ¶  ¶¶ 
+¶¶¶¶¶¶¶¶¶         ¶¶ 
+¶¶¶¶¶¶¶¶¶        ¶¶ 
+¶¶¶¶¶¶¶¶¶       ¶¶1 11111 
+¶¶¶¶¶¶¶¶      ¶¶11¶¶¶¶¶¶¶¶¶¶1 
+¶¶¶¶¶¶¶¶     ¶¶1¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+¶11¶¶¶¶    ¶¶¶ ¶¶¶1111¶¶¶¶¶¶¶¶¶¶1 
+¶11¶¶¶  1¶¶¶    ¶¶¶¶1111¶¶¶¶¶¶¶¶¶1 
+¶¶¶¶1  ¶¶¶1      ¶¶¶¶¶11¶¶¶¶¶¶¶¶¶¶1 
+¶1   1¶¶¶          ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+¶  ¶¶¶¶              1¶¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+1¶¶¶¶                   111¶11¶1 
+¶¶1 
 
-    // Handle checkbox toggling
-    const handleCategoryChange = (category) => {
-        setSelectedCategories((prevSelected) =>
-            prevSelected.includes(category)
-                ? prevSelected.filter((c) => c !== category)
-                : [...prevSelected, category]
-        );
-    };
+        `,
+    `
+        ˚∧＿∧  　+        —̳͟͞͞💗
+        (  •‿• )つ  —̳͟͞͞ 💗         —̳͟͞͞💗 +
+        (つ　 <                —̳͟͞͞💗
+        ｜　 _つ      +  —̳͟͞͞💗         —̳͟͞͞💗 ˚
+        
+        `,
+  ];
 
-    // Filter items based on selected categories
-    useEffect(() => {
-        if (selectedCategories.length === 0) {
-            // Show all items if no category is selected
-            setItems(restaurantData.items.map((item) => item.name));
-        } else {
-            // Show items that belong to all selected categories
-            const filteredItems = restaurantData.items.filter((item) =>
-                selectedCategories.every((category) =>
-                    restaurantData.categories
-                        .find((cat) => cat.category === category)
-                        .itemIds.includes(item.id)
-                )
-            );
-            setItems(filteredItems.map((item) => item.name));
-        }
-    }, [selectedCategories]);
+  const [index, setIndex] = useState(0);
 
-    const selectResultEventHandler = (data) => {
-        if (items.length > 0 && !spinning) {
-            setSpinning(true);
-            const selectedIndex = data;
+  const handleNextRose = () => {
+    setIndex((prev) => (prev + 1) % roses.length);
+  };
 
-            setTimeout(() => {
-                setSpinning(false);
-                setWinners([...winners, items[selectedIndex]]);
-                setOpenModal(true);
-            }, window.localStorage.getItem("duration") * 1000);
-        }
-    };
-
-    let newWinnerIndex = winners.length - 1;
-
-    return (
-        <section className="relative min-h-screen flex justify-center items-center bg-cyan-200">
-            <div>
-                <h2>Category</h2>
-                <ul>
-                    {restaurantData.categories.map((category, index) => (
-                        <li key={index}>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    onChange={() =>
-                                        handleCategoryChange(category.category)
-                                    }
-                                    checked={selectedCategories.includes(
-                                        category.category
-                                    )}
-                                />
-                                {category.category}
-                            </label>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <Wheel
-                items={items}
-                onChange={selectResultEventHandler}
-                spinning={spinning}
-                wheelColor={wheelColor}
-                fontColor={fontColor}
-            />
-            {openModal && (
-                <div className="p-10 bg-gradient-to-t from-green-600 to-green-400 rounded-md text-center">
-                    <h1
-                        style={{ color: "#E50303" }}
-                        className="text-xl font-bold"
-                    >
-                        Congratulations you won a lottery!!!
-                    </h1>
-                    <p>{winners[newWinnerIndex]}</p>
-                </div>
-            )}
-        </section>
-    );
+  return (
+    <>
+      <div className="fullscreen-container">
+        <pre className="rose-ascii">{roses[index]}</pre>
+      </div>
+      <div className="button-container">
+        <img
+          src={Button}
+          alt="Next Rose"
+          onClick={handleNextRose}
+          style={{
+            cursor: "pointer",
+            width: "48px",
+            height: "48px",
+          }}
+        />
+      </div>
+    </>
+  );
 }
 
 export default Home;
